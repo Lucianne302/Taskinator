@@ -46,7 +46,8 @@ var createTaskEl = function(taskDataObj) {
     taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
     listItemEl.appendChild(taskInfoEl);
 
-    var taskActionEl = createTaskActions(taskIdCounter);
+    var taskActionEl = createTaskActions(taskIdCounter);    
+    
     listItemEl.appendChild(taskActionEl);
     tasksToDoEl.appendChild(listItemEl); 
 
@@ -65,7 +66,7 @@ var createTaskActions = function(taskId) {
     var editButtonEl = document.createElement("button");
     editButtonEl.textContent = "Edit";
     editButtonEl.className = "btn edit-btn";
-    editButtonEl.setAttribute = "data-task-id", taskId;
+    editButtonEl.setAttribute("data-task-id", taskId);
 
     actionContainerEl.appendChild(editButtonEl); 
 
@@ -73,14 +74,14 @@ var createTaskActions = function(taskId) {
     var deleteButtonEl = document.createElement("button"); 
     deleteButtonEl.textContent = "Delete";
     deleteButtonEl.className = "btn delete-btn";
-    deleteButtonEl.setAttribute = "data-task-id", taskId;
+    deleteButtonEl.setAttribute("data-task-id", taskId);
 
     actionContainerEl.appendChild(deleteButtonEl);
 
     var statusSelectEl = document.createElement("select");
     statusSelectEl.className = "select-status";
-    statusSelectEl.setAttribute = "name", "status-change";
-    statusSelectEl.setAttribute = "data-task-id", taskId;
+    statusSelectEl.setAttribute("name", "status-change");
+    statusSelectEl.setAttribute("data-task-id", taskId);
 
     actionContainerEl.appendChild(statusSelectEl); 
 
@@ -89,7 +90,7 @@ var createTaskActions = function(taskId) {
         //create option element
         var statusOptionEl = document.createElement("option");
         statusOptionEl.textContent = statusChoices[i];
-        statusOptionEl.setAttribute ("value", statusChoices[i]);
+        statusOptionEl.setAttribute("value", statusChoices[i]);
 
         // append to select
         statusSelectEl.appendChild(statusOptionEl); 
@@ -106,14 +107,14 @@ var taskButtonHandler = function(event) {
     if (event.target.matches(".delete-btn")) {
         // get the element's task id
         var taskId = event.target.getAttribute("data-task-id");
-        console.log("taskId");
-        //deleteTask("taskId");
+
+        deleteTask(taskId);
     }
 };
 
 var deleteTask = function(taskId) {
     var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
-    //console.log(taskId);
+    //console.log(taskSelected);
     taskSelected.remove();
 };
 
