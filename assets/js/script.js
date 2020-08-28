@@ -293,9 +293,82 @@ var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 
+var loadTasks = function() {
+
+    /* 
+    1. Gets task items from localStorage
+    
+    2. Converts tasks from the stringified format back into an array of objects
+    
+    3. Iterates through tasks array and creates task elements on the page from it */
+    var savedTasks = localStorage.getItem("tasks");
+       
+    if (!tasks) {
+        tasks = [];
+        return false; 
+    }
+    tasks = JSON.parse(savedTasks);
+    console.log("task list:");
+    console.log(tasks);
+
+    // loop through savedTasks array
+    for (var i = 0; i < tasks.length; i++) {
+        if (tasks[i].id === parseInt(id)) {
+            tasks[i].status = statusSelectEl.value.toLowerCase();
+        console.log("loop - "+i);
+        }
+        // tasks[i].id = taskIdCounter;
+        //taskIdCounter++;
+        //console.log(tasks[i]);
+    }
+
+    /*create list item
+    var listItemEl = document.createElement("li");
+    listItemEl.className = "task-item";
+
+    // add task id as a custom attribute
+    listItemEl.setAttribute("data-task-id", tasks[i].id);
+
+    listItemEl.setAttribute("draggable", "true");
+
+    console.log(listItemEl);
+
+    // create div to hold task info and add to list item
+    var taskInfoEl = document.createElement("div");
+
+    // give it a class name
+    taskInfoEl.className = "task-info";
+
+    // add HTML content to div
+    taskInfoEl.innerHTML = "<h3 class='task-name'>" + task[i].name + "</h3><span class='task-type'>" + task[i].type + "</span>";
+    listItemEl.appendChild(taskInfoEl);
+
+    var taskActionEl = createTaskActions(task[i].id);    
+    
+    listItemEl.appendChild(taskActionEl);
+    tasksToDoEl.appendChild(listItemEl); 
+
+    console.log(listItemEl);
+
+    if(tasks[i].status === "tasks-to-do") {
+        listItemEl.querySelector("select[name='status-change']").selectedIndex = 0;
+    } 
+
+    listItemEl.appendChild(tasksToDoEl); */
+
+
+    // pass each task object into the `createTaskEl()` function
+    //createTaskEl(saveTasks[i]);
+
+};
+
+
+
 pageContentEl.addEventListener("click", taskButtonHandler);
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
 pageContentEl.addEventListener("dragstart", dragTaskHandler);
 pageContentEl.addEventListener("dragover", dropZoneDragHandler);
 pageContentEl.addEventListener("drop", dropTaskHandler);
 pageContentEl.addEventListener("dragleave", dragLeaveHandler);
+
+loadTasks();
