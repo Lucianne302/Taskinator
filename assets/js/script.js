@@ -313,11 +313,8 @@ var loadTasks = function() {
 
     // loop through savedTasks array
     for (var i = 0; i < tasks.length; i++) {
-        if (tasks[i].id === parseInt(id)) {
-            tasks[i].status = statusSelectEl.value.toLowerCase();
         console.log("loop - "+i);
-        }
-        // tasks[i].id = taskIdCounter;
+        //tasks[i].id = taskIdCounter;
         //taskIdCounter++;
         //console.log(tasks[i]);
     }
