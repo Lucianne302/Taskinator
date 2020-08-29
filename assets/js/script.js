@@ -184,7 +184,7 @@ var taskButtonHandler = function(event) {
 
 var deleteTask = function(taskId) {
     var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
-    //console.log(taskSelected);
+
     taskSelected.remove();
 
     // create new array to hold updated list of tasks
@@ -308,7 +308,6 @@ var loadTasks = function() {
         return false; 
     }
     tasks = JSON.parse(savedTasks) || [];
-    console.log("task list:");
     console.log(tasks);
 
     // loop through savedTasks array
@@ -342,21 +341,20 @@ var loadTasks = function() {
         var taskActionEl = createTaskActions(tasks[i].id);    
     
         listItemEl.appendChild(taskActionEl);
-        console.log("list-item 123");
     
-        console.log(listItemEl);
+        console.log(tasks[i].status);
     
-        if (tasks[i].status === "tasks-to-do") {
+        if (tasks[i].status === "to do") {
             listItemEl.querySelector("select[name='status-change']").selectedIndex = 0;
-            listItemEl.appendChild(tasksToDoEl);
+            tasksToDoEl.appendChild(listItemEl);
 
         } else if (tasks[i].status === "in progress") {
-            listItemEl.querySelector("select[name='status-change']").selectedIndex = 1;
-           listItemEl.appendChild(tasksInProgressEl);
+           listItemEl.querySelector("select[name='status-change']").selectedIndex = 1;
+           tasksInProgressEl.appendChild(listItemEl);
 
         } else if (tasks[i].status === "completed") {
             listItemEl.querySelector("select[name='status-change']").selectedIndex = 2;
-            listItemEl.appendChild(tasksCompletedEl);
+            tasksCompletedEl.appendChild(listItemEl);
             taskIdCounter++;
             console.log(listItemEl); 
         }
